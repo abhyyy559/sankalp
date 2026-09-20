@@ -32,10 +32,14 @@ import numpy as np
 def analyze_wav(path):
     """Speech-like energy heuristic. NOT transcription. NOT Whisper."""
     import wave
-    with wave.open(str(path), "rb") as w:
-        n, ch, sw, fr = w.getnframes(), w.getnchannels(), w.getsampwidth(), \
-            w.getframerate()
-        raw = w.readframes(n)
+    try:
+        with wave.open(str(path), "rb") as w:
+            n, ch, sw, fr = w.getnframes(), w.getnchannels(), \
+                w.getsampwidth(), w.getframerate()
+            raw = w.readframes(n)
+    except (wave.Error, EOFError, OSError) as e:
+        return {"verdict": "unreadable audio file — refused",
+                "error": f"{type(e).__name__}: {e}"}
     dtype = {1: np.int8, 2: np.int16, 4: np.int32}[sw]
     pcm = np.frombuffer(raw, dtype=dtype).astype(np.float32)
     if ch > 1:

@@ -7,3 +7,5 @@ verifier/__pycache__/
 voice/__pycache__/
 *.pyc
 .DS_Store
+# local verification screenshots, not part of the product
+webapp/shots/

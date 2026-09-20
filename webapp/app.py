@@ -39,6 +39,7 @@ import mint as mint_mod                # noqa: E402
 app = Flask(__name__,
             template_folder=str(HERE / "templates"),
             static_folder=str(HERE / "static"))
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # reject huge uploads
 
 DEMO_LEDGER = HERE / "demo_ledger"
 INBOX = DEMO_LEDGER / "inbox"
@@ -98,7 +99,7 @@ def annotate_with_M(src_path, res, M, out_path):
     cv2.putText(img, banner, (12, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8,
                 (255, 255, 255), 2, cv2.LINE_AA)
     if not ok:
-        cv2.putText(img, f"REFUSED: {res.refuse_reason} — no count, no receipt",
+        cv2.putText(img, f"REFUSED: {res.refuse_reason} - no count, no receipt",
                     (12, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.7,
                     (255, 255, 255), 2, cv2.LINE_AA)
     cv2.imwrite(str(out_path), img)
@@ -159,20 +160,30 @@ def run_mint(box):
     sys.argv = ["mint.py", "--count", str(count_json),
                 "--photo", str(photo), "--voice", str(voice_json)]
     try:
-        try:
-            mint_mod.main()
-            code = 0
-        except SystemExit as e:
-            code = e.code if isinstance(e.code, int) else 1
+        # NOTE: mint.main() RETURNS its exit code (0 ok, 2 duplicate) and
+        # only sys.exit()s on hard refusals — handle both. A SystemExit(2)
+        # from argparse is a usage error, NOT a duplicate, so track the
+        # source explicitly.
+        ret = mint_mod.main()
+        code = ret if isinstance(ret, int) else 0
+        duplicate = (code == 2)
+    except SystemExit as e:
+        code = e.code if isinstance(e.code, int) else 1
+        duplicate = False
     finally:
         sys.argv = old_argv
-    if code == 2:
+    if duplicate:
         gf = DEMO_LEDGER / "gaps.jsonl"
         gaps = [json.loads(ln) for ln in gf.read_text().splitlines()
                 if ln.strip()] if gf.exists() else []
         return 2, None, (gaps[-1] if gaps else {})
     if code != 0:
         raise RuntimeError(f"mint.py exited {code}")
+    # mint.py purged upload.png; drop the annotated demo copy too, so the
+    # receipt page's "source photo purged" claim is literally true.
+    ann = box / "annotated.png"
+    if ann.exists():
+        ann.unlink()
     receipts = read_receipts()
     return 0, receipts[-1], None
 
@@ -193,7 +204,10 @@ def seed_demo_history():
     seed = INBOX / "_seed"
     seed.mkdir(parents=True, exist_ok=True)
     base = date(2026, 9, 14)
-    for i, sid in enumerate(["S01", "S03", "S05", "S08", "S11", "S13"]):
+    # NOTE: S11 is deliberately NOT seeded — the demo flow uploads S11.png
+    # for the accepted-strip shot, and a seeded S11 would (correctly) trip
+    # the dHash replay guard instead of minting.
+    for i, sid in enumerate(["S01", "S03", "S05", "S08", "S02", "S13"]):
         gt = json.loads(
             (REPO / "pipeline" / "test_data" / f"{sid}.json").read_text())
         fmt = gt["format"]
@@ -215,13 +229,14 @@ def seed_demo_history():
                     "--photo", str(photo), "--voice", str(box / "voice.json"),
                     "--demo-date", (base + timedelta(days=i)).isoformat()]
         try:
-            try:
-                mint_mod.main()
-            except SystemExit as e:
-                if e.code not in (0, None):
-                    raise RuntimeError(f"seed mint {sid} exited {e.code}")
+            ret = mint_mod.main()
+            code = ret if isinstance(ret, int) else 0
+        except SystemExit as e:
+            code = e.code if isinstance(e.code, int) else 1
         finally:
             sys.argv = old_argv
+        if code != 0:
+            raise RuntimeError(f"seed mint {sid} exited {code}")
 
 
 # ---------------------------------------------------------------- routes
@@ -244,6 +259,9 @@ def count():
     box.mkdir(parents=True, exist_ok=True)
     dest = box / "upload.png"
     f.save(str(dest))
+    if cv2.imread(str(dest)) is None:
+        shutil.rmtree(box, ignore_errors=True)
+        abort(400, "uploaded file is not a readable image")
     res, M, doc = run_count(dest, cid[:8].upper(), fmt)
     (box / "count.json").write_text(json.dumps(doc, indent=1))
     annotate_with_M(dest, res, M, box / "annotated.png")
@@ -306,7 +324,9 @@ def mint(cid):
     photo = box / "upload.png"
     if not photo.exists():
         # already minted+purged earlier in this session
-        return redirect(url_for("receipt", rid=entry["rid"]))
+        if entry["rid"]:
+            return redirect(url_for("receipt", rid=entry["rid"]))
+        abort(410, "photo already purged and no receipt is linked")
     run_checkin_agree(box)  # real voice module (operator-confirmed stub)
     code, receipt, gap = run_mint(box)
     if code == 2:

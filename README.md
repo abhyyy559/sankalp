@@ -1,6 +1,6 @@
 # Sankalp — dose evidence from a blister-strip photo
 
-**Synthetic benchmark: 100% slot accuracy on 311 decided slots across 22 generated strips (20 accepted, 2 refused by the confidence gate); mean latency 270 ms on CPU.** Prototype status: the counting, gating, receipt, and verification loop runs end-to-end on this machine; the Android app is a skeleton; the Hindi voice path is a stub.
+**Synthetic benchmark: 100% slot accuracy on 311 decided slots across 22 generated strips (20 accepted, 2 refused by the confidence gate); mean latency ≈250 ms on CPU (measured on this machine; varies by hardware).** Prototype status: the counting, gating, receipt, and verification loop runs end-to-end on this machine; the Android app is a skeleton; the Hindi voice path is a stub.
 
 Read that first line carefully, because the qualifications matter:
 

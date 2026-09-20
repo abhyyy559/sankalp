@@ -12,7 +12,7 @@ mkdir -p "$DEMO/inbox"
 
 say() { echo; echo "=== $1 ==="; }
 
-say "1/7  foil counter on the 20-strip synthetic test set (measured now)"
+say "1/7  foil counter on the 22-strip synthetic test set (measured now)"
 python3 "$ROOT/pipeline/test_pipeline.py" 2>&1 | grep -E "^(  S|OVERALL)" | tail -24
 python3 - "$ROOT" <<'EOF'
 import json, sys
