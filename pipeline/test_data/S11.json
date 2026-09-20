@@ -1,0 +1,83 @@
+{
+ "strip_id": "S11",
+ "format": "HT-1x10",
+ "rows": 1,
+ "cols": 10,
+ "n_slots": 10,
+ "synthetic": true,
+ "flags": [],
+ "seed": 3303,
+ "n_pressed": 2,
+ "slots": [
+  {
+   "id": 0,
+   "cx": 90.1,
+   "cy": 340.8,
+   "state": "pressed",
+   "radius": 44
+  },
+  {
+   "id": 1,
+   "cx": 182.8,
+   "cy": 349.0,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 2,
+   "cx": 278.8,
+   "cy": 357.5,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 3,
+   "cx": 378.3,
+   "cy": 366.3,
+   "state": "pressed",
+   "radius": 44
+  },
+  {
+   "id": 4,
+   "cx": 481.5,
+   "cy": 375.5,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 5,
+   "cx": 588.6,
+   "cy": 385.0,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 6,
+   "cx": 699.8,
+   "cy": 394.8,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 7,
+   "cx": 815.5,
+   "cy": 405.0,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 8,
+   "cx": 935.8,
+   "cy": 415.7,
+   "state": "full",
+   "radius": 44
+  },
+  {
+   "id": 9,
+   "cx": 1061.0,
+   "cy": 426.8,
+   "state": "full",
+   "radius": 44
+  }
+ ]
+}

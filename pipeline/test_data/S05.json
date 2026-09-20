@@ -1,0 +1,153 @@
+{
+ "strip_id": "S05",
+ "format": "DM-4x5",
+ "rows": 4,
+ "cols": 5,
+ "n_slots": 20,
+ "synthetic": true,
+ "flags": [],
+ "seed": 2201,
+ "n_pressed": 3,
+ "slots": [
+  {
+   "id": 0,
+   "cx": 114.8,
+   "cy": 102.0,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 1,
+   "cx": 226.1,
+   "cy": 100.3,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 2,
+   "cx": 340.3,
+   "cy": 98.6,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 3,
+   "cx": 457.4,
+   "cy": 96.8,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 4,
+   "cx": 577.6,
+   "cy": 94.9,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 5,
+   "cx": 120.3,
+   "cy": 221.9,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 6,
+   "cx": 231.7,
+   "cy": 221.7,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 7,
+   "cx": 346.0,
+   "cy": 221.5,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 8,
+   "cx": 463.3,
+   "cy": 221.3,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 9,
+   "cx": 583.7,
+   "cy": 221.1,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 10,
+   "cx": 125.7,
+   "cy": 341.9,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 11,
+   "cx": 237.3,
+   "cy": 343.2,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 12,
+   "cx": 351.7,
+   "cy": 344.6,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 13,
+   "cx": 469.2,
+   "cy": 346.0,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 14,
+   "cx": 589.7,
+   "cy": 347.5,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 15,
+   "cx": 131.2,
+   "cy": 462.0,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 16,
+   "cx": 242.9,
+   "cy": 464.9,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 17,
+   "cx": 357.5,
+   "cy": 467.8,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 18,
+   "cx": 475.0,
+   "cy": 470.8,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 19,
+   "cx": 595.7,
+   "cy": 473.9,
+   "state": "full",
+   "radius": 46
+  }
+ ]
+}

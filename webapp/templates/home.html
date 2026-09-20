@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Photograph your blister strip{% endblock %}
+{% block body %}
+<section class="hero">
+  <h1>Dose evidence from a photo<br>of the blister strip.</h1>
+  <p class="lede">Ravi photographs his strip after a dose. On-device vision counts what was
+  <strong>removed</strong> — not what was dispensed — and mints a signed receipt only he holds.</p>
+</section>
+
+<section class="card">
+  <h2><span class="step">1</span> Photograph your blister strip</h2>
+  <form action="{{ url_for('count') }}" method="post" enctype="multipart/form-data" class="upload-form">
+    <label class="field">
+      <span>Strip photo</span>
+      <input type="file" name="photo" accept="image/*" capture="environment" required>
+    </label>
+    <label class="field">
+      <span>Strip format <em>(from the medication profile)</em></span>
+      <select name="format">
+        {% for f in formats %}
+        <option value="{{ f }}" {% if f == "TB-2x7" %}selected{% endif %}>{{ f }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <button class="btn big" type="submit">Count doses</button>
+  </form>
+  <div class="samples">
+    <span>No strip handy? Run a real test-set image through the same pipeline:</span>
+    <form action="{{ url_for('sample', sid='S11') }}" method="post"><button class="btn ghost" type="submit">Sample: clear strip</button></form>
+    <form action="{{ url_for('sample', sid='S09') }}" method="post"><button class="btn ghost" type="submit">Sample: glare strip</button></form>
+  </div>
+</section>
+
+<section class="how">
+  <div class="how-card"><strong>Photo → count</strong><span>Foil slots counted on-device. Unsure? The gate refuses — refusing beats miscounting.</span></div>
+  <div class="how-card"><strong>Voice agrees</strong><span>A Hindi check-in must agree with the photo before anything is recorded.</span></div>
+  <div class="how-card"><strong>Receipt mints</strong><span>SHA-256-chained, Ed25519-signed. Raw photo purged. Nothing syncs anywhere.</span></div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Strip count — {{ c.status }}{% endblock %}
+{% block body %}
+{% if c.status == "accepted" %}
+<div class="banner ok">✓ ACCEPTED — counted with confidence</div>
+{% else %}
+<div class="banner bad">✕ REFUSED — no count, no receipt</div>
+{% endif %}
+
+{% if dup %}
+<div class="banner warn">Duplicate photo detected — logged as a <strong>gap event</strong>, not double-counted, never punished.</div>
+{% endif %}
+
+<section class="card">
+  <img class="strip-img" src="{{ url_for('img', cid=cid) }}" alt="annotated strip">
+  {% if c.status != "accepted" %}
+  <p class="refuse-reason"><strong>Refusal reason:</strong> <code>{{ c.refuse_reason }}</code><br>
+  The confidence gate refuses the whole strip when unsure — refusing beats miscounting. Retake the photo in better light.</p>
+  {% endif %}
+</section>
+
+<section class="stats">
+  <div class="stat"><span class="num green">{{ c.n_full }}</span><span class="lbl">full slots</span></div>
+  <div class="stat"><span class="num orange">{{ c.n_pressed }}</span><span class="lbl">pressed (doses removed)</span></div>
+  <div class="stat"><span class="num {% if c.n_uncertain %}amber{% endif %}">{{ c.n_uncertain }}</span><span class="lbl">uncertain</span></div>
+  <div class="stat"><span class="num">{{ "%.0f"|format(c.latency_ms) }}<small> ms</small></span><span class="lbl">latency</span></div>
+  <div class="stat"><span class="num badge">CPU</span><span class="lbl">delegate — the one that actually ran</span></div>
+</section>
+
+<section class="card nav">
+  {% if c.status == "accepted" %}
+  <a class="btn big" href="{{ url_for('voice', cid=cid) }}">Continue → voice check-in</a>
+  {% else %}
+  <a class="btn big" href="{{ url_for('home') }}">← Try another photo</a>
+  {% endif %}
+  <a class="btn ghost" href="{{ url_for('console') }}">Provider console</a>
+</section>
+{% endblock %}

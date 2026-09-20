@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Dose receipt{% endblock %}
+{% block body %}
+<div class="banner ok">✓ Dose receipt minted — signed, chained, yours</div>
+
+<section class="card receipt">
+  <div class="receipt-top">
+    <div>
+      <div class="r-label">Receipt</div>
+      <div class="r-hash mono">{{ r.hash[:16] }}…</div>
+      <div class="r-meta">Chain position <strong>#{{ pos }} of {{ total }}</strong> · {{ r.body.ts[:10] }}</div>
+    </div>
+    <img class="qr" src="{{ url_for('qr', name=qr_name) }}" alt="receipt QR">
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="num orange">{{ r.body.n_pressed }}/{{ r.body.n_slots }}</span><span class="lbl">pressed slots</span></div>
+    <div class="stat"><span class="num">{{ "%.2f"|format(r.body.confidence) }}</span><span class="lbl">mean confidence</span></div>
+  </div>
+  <dl class="kv">
+    <dt>Ed25519 signature</dt><dd class="mono">{{ r.sig[:32] }}…</dd>
+    <dt>SHA-256 hash</dt><dd class="mono">{{ r.hash[:32] }}…</dd>
+    <dt>Previous hash</dt><dd class="mono">{{ r.body.prev_hash[:16] }}…</dd>
+    <dt>Voice check-in</dt><dd>{{ r.body.voice_method }}</dd>
+    <dt>Source photo</dt><dd class="purged">purged ✓ — the ledger keeps counts, never images</dd>
+  </dl>
+</section>
+
+<section class="card nav">
+  <a class="btn big" href="{{ url_for('console') }}">Provider console →</a>
+  <a class="btn ghost" href="{{ url_for('home') }}">New strip</a>
+</section>
+{% endblock %}

@@ -1,0 +1,153 @@
+{
+ "strip_id": "S18",
+ "format": "DM-4x5",
+ "rows": 4,
+ "cols": 5,
+ "n_slots": 20,
+ "synthetic": true,
+ "flags": [],
+ "seed": 2207,
+ "n_pressed": 15,
+ "slots": [
+  {
+   "id": 0,
+   "cx": 286.3,
+   "cy": 135.6,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 1,
+   "cx": 404.4,
+   "cy": 140.9,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 2,
+   "cx": 524.9,
+   "cy": 146.4,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 3,
+   "cx": 647.7,
+   "cy": 151.9,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 4,
+   "cx": 772.8,
+   "cy": 157.5,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 5,
+   "cx": 275.3,
+   "cy": 255.6,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 6,
+   "cx": 392.7,
+   "cy": 262.0,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 7,
+   "cx": 512.5,
+   "cy": 268.6,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 8,
+   "cx": 634.5,
+   "cy": 275.3,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 9,
+   "cx": 758.9,
+   "cy": 282.1,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 10,
+   "cx": 264.4,
+   "cy": 374.4,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 11,
+   "cx": 381.2,
+   "cy": 381.9,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 12,
+   "cx": 500.2,
+   "cy": 389.6,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 13,
+   "cx": 621.5,
+   "cy": 397.4,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 14,
+   "cx": 745.2,
+   "cy": 405.4,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 15,
+   "cx": 253.6,
+   "cy": 492.1,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 16,
+   "cx": 369.7,
+   "cy": 500.7,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 17,
+   "cx": 488.0,
+   "cy": 509.4,
+   "state": "pressed",
+   "radius": 46
+  },
+  {
+   "id": 18,
+   "cx": 608.6,
+   "cy": 518.3,
+   "state": "full",
+   "radius": 46
+  },
+  {
+   "id": 19,
+   "cx": 731.5,
+   "cy": 527.4,
+   "state": "pressed",
+   "radius": 46
+  }
+ ]
+}

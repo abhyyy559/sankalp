@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Provider console{% endblock %}
+{% block body %}
+<section class="hero slim">
+  <h1>Provider console</h1>
+  <p class="lede">The Office Kit bridge: the phone streams receipts to a laptop, which verifies
+  <strong>every signature</strong> offline — without ever touching the patient's raw photos.</p>
+</section>
+
+{% if ok %}
+<div class="banner ok">✓ {{ verdict }}</div>
+{% else %}
+<div class="banner bad">✕ {{ verdict or "verification failed" }}</div>
+{% endif %}
+
+<section class="card">
+  <h2>Receipt chain — {{ n_receipts }} receipts</h2>
+  <div class="terminal">
+{% for ln in ok_lines %}    <div class="tline">{{ ln }}</div>
+{% endfor %}
+  </div>
+  <details class="full-log">
+    <summary>Full verifier output</summary>
+    <pre class="terminal">{% for ln in lines %}{{ ln }}
+{% endfor %}</pre>
+  </details>
+</section>
+
+{% if has_drift %}
+<section class="card">
+  <h2>Drift vs the patient's own 14-day baseline</h2>
+  <img class="drift-img" src="{{ url_for('drift') }}" alt="adherence drift curve">
+  <p class="muted">A gap is data, not a violation. No patient photos involved — only counts, hashes and signatures.</p>
+</section>
+{% endif %}
+
+<section class="card nav">
+  <a class="btn ghost" href="{{ url_for('home') }}">← New strip</a>
+</section>
+{% endblock %}

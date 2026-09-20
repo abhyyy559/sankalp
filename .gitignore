@@ -1,0 +1,9 @@
+# runtime state — never commit device keys, receipts, or temp demo output
+receipts/ledger/
+webapp/demo_ledger/
+pipeline/__pycache__/
+receipts/__pycache__/
+verifier/__pycache__/
+voice/__pycache__/
+*.pyc
+.DS_Store

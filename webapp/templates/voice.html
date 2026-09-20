@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Voice check-in{% endblock %}
+{% block body %}
+<section class="card voice-card">
+  <h2><span class="step">2</span> Voice check-in</h2>
+  <p class="lede">The photo says <strong>{{ c.n_pressed }} dose{{ "s" if c.n_pressed != 1 }} removed</strong>.
+  Before anything is recorded, a short Hindi check-in must agree with it.</p>
+  <div class="phrase-box">
+    <div class="phrase-hi">“haan, dawa le li”</div>
+    <div class="phrase-en">yes, I took the dose</div>
+  </div>
+  <div class="honest">
+    <strong>Honest prototype status:</strong> tapping confirm records an
+    <em>operator-confirmed</em> check-in — a stand-in, not transcription.
+    This is <strong>not</strong> Whisper. The on-device Whisper-quant
+    (Hindi, airplane-mode) port is in progress — see <code>voice/README.md</code>.
+  </div>
+  <form action="{{ url_for('mint', cid=cid) }}" method="post">
+    <button class="btn big" type="submit">I said it — mint the receipt</button>
+  </form>
+  <a class="btn ghost" href="{{ url_for('result', cid=cid) }}">← Back to count</a>
+</section>
+{% endblock %}

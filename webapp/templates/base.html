@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Sankalp{% endblock %} · Sankalp prototype</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="{{ url_for('home') }}">Sankalp</a>
+    <span class="proto-badge">prototype</span>
+    <span class="topbar-note">Offline dose evidence · owned by the patient</span>
+  </div>
+</header>
+<main class="wrap">
+{% block body %}{% endblock %}
+</main>
+<footer class="wrap foot">
+  Reference pipeline on CPU · test images are synthetic · Android app + on-device Whisper-quant port in progress.
+  We prove removal from the strip, not ingestion.
+</footer>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Sankalp prototype — Python dependencies (desktop reference pipeline)
+# Tested on Python 3.12, Linux x86_64, CPU only.
+numpy==1.26.4
+opencv-python-headless==4.8.1.78
+Pillow==10.2.0
+matplotlib==3.6.3
+PyNaCl==1.6.2
+qrcode==8.2
+zxing-cpp==3.1.1
+Flask==3.1.3
